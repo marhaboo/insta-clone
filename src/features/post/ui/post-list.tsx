@@ -46,7 +46,7 @@ export default function PostList() {
           const post = postObj as {
             postId: number;
             images: string[];
-            [key: string]: any;
+            [key: string]: unknown;
           };
           return {
             ...post,
