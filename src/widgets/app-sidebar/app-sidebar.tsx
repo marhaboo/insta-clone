@@ -3,15 +3,36 @@ import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarMenu
 import { usePathname } from "next/navigation";
 import { useDispatch } from "react-redux";
 import Link from "next/link";
-import { InstagramLogoIcon, InstagramText } from "@/app/assets/icon/svg";
-import { items } from "@/entities/navigation/data";
 import Image from "next/image";
-import Profile from "@/widgets/app-sidebar/profile.jpg";
 import { useSettings } from "@/pages/(router)/(layout)/settings/contexts/settings-contexts";
 import { SearchSidebar } from "../app-sheet/app-sheet";
-import { Settings } from "lucide-react";
+import {
+  Home,
+  Search,
+  Compass,
+  Film,
+  MessageCircle,
+  Bell,
+  PlusSquare,
+  Settings,
+  Home as HomeFilled,
+  Search as SearchFilled,
+  Compass as CompassFilled,
+  Film as FilmFilled,
+  MessageCircle as MessageFilled,
+  Bell as BellFilled,
+  PlusSquare as PlusSquareFilled,
+} from "lucide-react"; // используем Lucide иконки
 
 type Language = 'en' | 'ru' | 'tj';
+
+interface SidebarItem {
+  title: string;
+  url: string;
+  icon: React.ElementType;
+  activeIcon: React.ElementType;
+  onClick?: () => void;
+}
 
 export function AppSidebar() {
   const dispatch = useDispatch();
@@ -54,6 +75,16 @@ export function AppSidebar() {
 
   const t = translations[language] || translations.tj;
 
+  const items: SidebarItem[] = [
+    { title: "Home", url: "/", icon: Home, activeIcon: HomeFilled },
+    { title: "Search", url: "#", icon: Search, activeIcon: SearchFilled, onClick: () => setIsSearchSidebarOpen(!isSearchSidebarOpen) },
+    { title: "Explore", url: "/explore", icon: Compass, activeIcon: CompassFilled },
+    { title: "Reels", url: "/reels", icon: Film, activeIcon: FilmFilled },
+    { title: "Messages", url: "/messages", icon: MessageCircle, activeIcon: MessageFilled },
+    { title: "Notifications", url: "/notifications", icon: Bell, activeIcon: BellFilled },
+    { title: "Create", url: "/create", icon: PlusSquare, activeIcon: PlusSquareFilled },
+  ];
+
   return (
     <Sidebar>
       <SidebarContent className={`transition-all duration-300 ${isSearchSidebarOpen ? 'w-[72px]' : 'w-full'}`}>
@@ -65,7 +96,7 @@ export function AppSidebar() {
                 <SidebarMenuButton>
                   <Link href="/">
                     <div className="flex items-center gap-2">
-                      {/* {isSearchSidebarOpen ? <InstagramLogoIcon /> : <InstagramText />} */}
+                      {/* Лого можно вставить сюда */}
                     </div>
                   </Link>
                 </SidebarMenuButton>
@@ -74,13 +105,15 @@ export function AppSidebar() {
               {items.map((item) => (
                 <SidebarMenuItem className="my-[4px] p-[4px]" key={item.title}>
                   <SidebarMenuButton asChild>
-                    <Link href={item.url || "#"} onClick={() => {
-                      if (item.title === "Search") {
-                        setIsSearchSidebarOpen(!isSearchSidebarOpen);
-                      } else if (item.onClick) {
-                        item.onClick();
-                      }
-                    }}>
+                    <Link
+                      href={item.url}
+                      onClick={(e) => {
+                        if (item.onClick) {
+                          e.preventDefault();
+                          item.onClick();
+                        }
+                      }}
+                    >
                       <div className="flex items-center gap-2">
                         {pathname === item.url ? (
                           <item.activeIcon size={24} />
@@ -104,10 +137,12 @@ export function AppSidebar() {
                         className="rounded-full"
                         width={25}
                         height={25}
-                        src={Profile}
+                        src="/images/profile.jpg"
                         alt="Profile"
                       />
-                      <span className={`transition-all duration-300 ${isSearchSidebarOpen ? 'hidden' : 'xl:block md:hidden'}`}>{t.profile}</span>
+                      <span className={`transition-all duration-300 ${isSearchSidebarOpen ? 'hidden' : 'xl:block md:hidden'}`}>
+                        {t.profile}
+                      </span>
                     </div>
                   </Link>
                 </SidebarMenuButton>
@@ -118,7 +153,9 @@ export function AppSidebar() {
                   <Link href="/settings">
                     <div className="flex items-center gap-2">
                       <Settings />
-                      <span className={`transition-all duration-300 ${isSearchSidebarOpen ? 'hidden' : 'xl:block md:hidden'}`}>Settings</span>
+                      <span className={`transition-all duration-300 ${isSearchSidebarOpen ? 'hidden' : 'xl:block md:hidden'}`}>
+                        Settings
+                      </span>
                     </div>
                   </Link>
                 </SidebarMenuButton>
