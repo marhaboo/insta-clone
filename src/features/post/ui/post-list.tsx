@@ -23,33 +23,47 @@ export default function PostList() {
     console.error("No access token found in local storage.");  
   }  
 
-  useEffect(() => {  
-    const fetchPosts = async () => {  
-      if (!token) return;   
-      
-      try {  
-        const { data } = await axiosRequest.get("/Post/get-posts?PageSize=10");  
-        const profileUser = await UserApi(decode.sid);  
-        setProfile(profileUser);  
-        
-        const transformedPosts: PostData[] = data.data.map((post: unknown) => ({  
-          ...post,  
-          media: post.images.map((image: string) => ({  
-            type: image.endsWith(".mp4") ? "video" : "image",  
-            url: `https://instagram-api.softclub.tj/images/${image}`,  
-          })),  
-        }));  
+useEffect(() => {
+  const fetchPosts = async () => {
+    const token = localStorage.getItem("access_token")?.slice(1, -1);
+    if (!token) {
+      console.error("No access token found in local storage.");
+      setIsLoading(false);
+      return;
+    }
 
-        setPosts(transformedPosts);  
-      } catch (error) {  
-        console.error("Failed to fetch posts:", error);  
-      } finally {  
-        setIsLoading(false);  
-      }  
-    };  
-   
-    fetchPosts();  
-  }, [token]); 
+    let decode: CustomJwtPayload;
+    try {
+      decode = jwtDecode<CustomJwtPayload>(token);
+    } catch (error) {
+      console.error("Invalid token");
+      setIsLoading(false);
+      return;
+    }
+
+    try {
+      const { data } = await axiosRequest.get("/Post/get-posts?PageSize=10");
+      const profileUser = await UserApi(decode.sid);
+      setProfile(profileUser);
+
+      const transformedPosts: PostData[] = data.data.map((post: any) => ({
+        ...post,
+        media: post.images.map((image: string) => ({
+          type: image.endsWith(".mp4") ? "video" : "image",
+          url: `https://instagram-api.softclub.tj/images/${image}`,
+        })),
+      }));
+
+      setPosts(transformedPosts);
+    } catch (error) {
+      console.error("Failed to fetch posts:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  fetchPosts();
+}, [])
 
   if (isLoading) {  
     return (  

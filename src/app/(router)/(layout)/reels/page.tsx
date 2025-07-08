@@ -1,6 +1,7 @@
 "use client"
 import { getReels } from "@/entities/reels/api/reels-api";
 import { Bookmark, Ellipsis, Heart, MessageCircle, SquareArrowOutUpRight } from "lucide-react";
+import Image from "next/image";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 export default function Reels() {
@@ -8,7 +9,7 @@ export default function Reels() {
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getReels())
-  }, [])
+  }, [dispatch])
   
   console.log(reels)
 
@@ -30,7 +31,7 @@ export default function Reels() {
                 <Ellipsis size={32} className="text-black " />
             </div>
               <div className="absolute bottom-[80px] left-5 flex items-center gap-3">
-              <img src="avatar.jpg" alt="" className="w-10 h-10 rounded-[20px] border-2 border-black"/>
+              <Image src="avatar.jpg" alt="" className="w-10 h-10 rounded-[20px] border-2 border-black"/>
               <h1 className="text-black font-bold">nyrose . </h1>
               <button className="border-2 border-black p-1 rounded w-[120px] ">подписаться</button>
              

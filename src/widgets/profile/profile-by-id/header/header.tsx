@@ -39,7 +39,7 @@ const itemVariants = {
   },
 }
 
-const ProfileByIdWidget = ({ data }: { data: any }) => {
+const ProfileByIdWidget = ({ data }: { data: unknown }) => {
   const params = useParams()
   const id = params ? (params["profile-by-id"] as string | null) : null
   const baseImageUrl = "https://instagram-api.softclub.tj/images/"

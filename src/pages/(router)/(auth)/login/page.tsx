@@ -79,6 +79,7 @@ const LoginForm = () => {
         setFormError(errorData.message || "An error occurred during login.")
       }
     } catch (error) {
+      console.error("Login error:", error)
       setFormError("An error occurred during login. Please try again.")
     }
   }

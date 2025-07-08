@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/shared/ui/sidebar";
 import { usePathname } from "next/navigation";
-import { useDispatch } from "react-redux";
 import Link from "next/link";
 import Image from "next/image";
 import { useSettings } from "@/pages/(router)/(layout)/settings/contexts/settings-contexts";

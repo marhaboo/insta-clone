@@ -1,12 +1,11 @@
-import { Grid, Bookmark, Film, Tag } from "lucide-react";
+import { Grid, Film, Tag } from "lucide-react";
 import PostsTab from "@/features/profile/posts-tab/posts-tab";
-import SavedTab from "@/features/profile/saved-tab/saved-tab";
 import ReelsTab from "@/features/profile/reels-tab/reels-tab";
 
 type TabsWidgetProps = {
   tab: string;
   setTab: (tab: string) => void;
-  myProfileData: any;
+  myProfileData: unknown;
 };
 
 const TabsWidget = ({ tab, setTab, myProfileData }: TabsWidgetProps) => {

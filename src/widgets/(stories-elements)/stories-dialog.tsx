@@ -48,6 +48,9 @@ export default function StoriesDialog({ users, initialUserIndex, onClose }: Stor
     const videoElement = mediaRef.current as HTMLVideoElement | null;
     let timer: NodeJS.Timeout;
 
+    // Сохраняем текущее значение рефа для использования в cleanup
+    const currentMedia = mediaRef.current;
+
     const advanceStory = () => {
       if (currentStoryIndex < currentUser.stories.length - 1) {
         setCurrentStoryIndex(currentStoryIndex + 1);
@@ -81,7 +84,6 @@ export default function StoriesDialog({ users, initialUserIndex, onClose }: Stor
 
     return () => {
       if (timer) clearInterval(timer);
-      const currentMedia = mediaRef.current;
       if (currentMedia && "onended" in currentMedia) {
         (currentMedia as HTMLVideoElement).onended = null;
       }
@@ -94,6 +96,7 @@ export default function StoriesDialog({ users, initialUserIndex, onClose }: Stor
     onClose,
     currentStory?.fileName,
     isPaused,
+    currentStory, // Добавлен в зависимости для предотвращения предупреждения
   ]);
 
   const handlePrevStory = () => {
@@ -119,7 +122,6 @@ export default function StoriesDialog({ users, initialUserIndex, onClose }: Stor
       onClose();
     }
   };
-
 
   return (
     <Dialog open onOpenChange={onClose}>
@@ -160,8 +162,8 @@ export default function StoriesDialog({ users, initialUserIndex, onClose }: Stor
                         index === currentStoryIndex
                           ? `${progress}%`
                           : index < currentStoryIndex
-                            ? "100%"
-                            : "0%",
+                          ? "100%"
+                          : "0%",
                     }}
                     transition={{ duration: 0.1, ease: "linear" }}
                   />
@@ -176,7 +178,7 @@ export default function StoriesDialog({ users, initialUserIndex, onClose }: Stor
               setIsMuted={setIsMuted}
             />
 
-            <StoryMedia fileName={currentStory?.fileName} isMuted={isMuted} />
+            <StoryMedia fileName={currentStory?.fileName} isMuted={isMuted} ref={mediaRef} />
 
             <button
               onClick={handlePrevStory}
@@ -215,10 +217,10 @@ export default function StoriesDialog({ users, initialUserIndex, onClose }: Stor
 
             <StoryFooter
               userName={currentUser}
-              onReplyClick={() => { }}
+              onReplyClick={() => {}}
               liked={currentStory?.liked}
               id={currentStory?.id}
-              onLikeClick={() => { }}
+              onLikeClick={() => {}}
             />
           </div>
 
