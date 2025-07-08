@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { Link, Outlet, useLocation } from 'react-router-dom'
 import { Menu, MenuItem } from '@mui/material'
-import Profile from '@/assets/icons/layout/instagramDefaultProfile.jpg'
 import {
 	action,
 	add,
@@ -138,13 +137,13 @@ export default function Bar() {
 
 							<Link to={'/profile'}>
 								<div className='flex super-img items-center gap-4  w-[90%]  m-auto rounded-[8px] h-[52px] hover:bg-[rgba(0,0,0,0.05)] px-4'>
-									<img
+									<Image
 										className={`${
 											pathname == '/profile'
 												? 'border-[2px] border-[solid] border-[black] rounded-[50%]'
 												: 'font-[400]'
 										} text-[16px] block`}
-										src={Profile}
+										src={"/images/profile.jpg"}
 										alt=''
 									/>
 									<p
