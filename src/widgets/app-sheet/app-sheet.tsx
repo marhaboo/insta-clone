@@ -5,11 +5,18 @@ import { Search, X } from "lucide-react"
 import { useDispatch, useSelector } from "react-redux"
 import { useRouter } from "next/navigation"
 import { searchUsers } from "@/entities/comment/api/search-api/api"
-import type { AppDispatch } from "@/app/store/store"
+import type { AppDispatch, RootState } from "@/app/store/store"
 import StoriesDialog, { type User } from "@/widgets/(stories-elements)/stories-dialog"
+import Image from "next/image"
 
 interface SearchSidebarProps {
   onClose: () => void
+}
+interface SearchResult {
+  id: string;
+  fullName: string;
+  avatar: string;
+  stories?: Story[];
 }
 
 export function SearchSidebar({ onClose }: SearchSidebarProps) {
@@ -17,7 +24,7 @@ export function SearchSidebar({ onClose }: SearchSidebarProps) {
   const router = useRouter()
   const [query, setQuery] = useState<string>("")
   const [selectedUser, setSelectedUser] = useState<User | null>(null)
-  const data = useSelector((state: any) => state.search.searchResults)
+  const data = useSelector((state: RootState) => state.search.searchResults)
 
   useEffect(() => {
     if (query.trim() !== "") {
@@ -48,13 +55,13 @@ export function SearchSidebar({ onClose }: SearchSidebarProps) {
 
       <div className="px-4">
         <h3 className="font-semibold mb-2 text-gray-900 dark:text-gray-100">Results</h3>
-        {data?.data?.slice(1, 5).map((el: any) => (
+        {data?.data?.slice(1, 5).map((el: SearchResult) => (
           <div
             key={el.id}
             className="flex items-center justify-between p-2 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md"
           >
             <div className="flex items-center">
-              <img
+              <Image
                 className="w-10 h-10 mr-3 rounded-full cursor-pointer"
                 src={`https://instagram-api.softclub.tj/images/${el.avatar}`}
                 alt=""

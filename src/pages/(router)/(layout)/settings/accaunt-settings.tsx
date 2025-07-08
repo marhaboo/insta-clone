@@ -65,7 +65,7 @@ const AccountSettings = () => {
 
   const t = translations[language]
 
-  const onSubmit = (data: any) => {
+  const onSubmit = (data: FormData) => {
     dispatch(editAccount({ ...token, sid: token?.sid, ...data }))
   }
 

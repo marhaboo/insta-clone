@@ -1,6 +1,5 @@
 "use client"
 import { getReels } from "@/entities/reels/api/reels-api";
-import { Button } from "@/shared/ui/button";
 import { Bookmark, Ellipsis, Heart, MessageCircle, SquareArrowOutUpRight } from "lucide-react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";

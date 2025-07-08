@@ -1,4 +1,4 @@
-import { Send, SendHorizonal, SendHorizonalIcon } from "lucide-react";
+import { Send } from "lucide-react";
 
 export default function SendIcon({ size = "6" }: { size?: string }) {
   return (

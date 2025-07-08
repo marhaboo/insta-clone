@@ -72,7 +72,7 @@ const SecuritySettings = () => {
 
   const t = translations[language]
 
-  const onSubmit = (data: any) => {
+  const onSubmit = (data: FormData) => {
     dispatch(securitySettings(data))
     reset()
   }

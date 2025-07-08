@@ -13,7 +13,7 @@ export default function DefaultChat() {
   const dispatch=useDispatch<AppDispatch>()
   useEffect(()=>{
 dispatch(getChats())
-  },[])
+  },[dispatch])
  return <>
  <div>
  <ChatLayout/>

@@ -1,7 +1,6 @@
 import { axiosRequest } from "@/shared/utils/axiosRequest";
 import {createAsyncThunk } from "@reduxjs/toolkit";
 import { JwtPayload } from "jwt-decode";
-import { date } from "zod";
 interface CustomJwtPayload extends JwtPayload {
   name?: string;
   email?: string;
@@ -10,7 +9,7 @@ interface CustomJwtPayload extends JwtPayload {
 
 export const deleteAccount = createAsyncThunk(
   'settings/deleteAccount',
-  async (id: string, {dispatch}) => {
+  async (id: string) => {
     try {
       console.log(id);
       const { data } = await axiosRequest.delete(`/User/delete-user?userId=${id}`);

@@ -81,8 +81,9 @@ export default function StoriesDialog({ users, initialUserIndex, onClose }: Stor
 
     return () => {
       if (timer) clearInterval(timer);
-      if (mediaRef.current && "onended" in mediaRef.current) {
-        (mediaRef.current as HTMLVideoElement).onended = null;
+      const currentMedia = mediaRef.current;
+      if (currentMedia && "onended" in currentMedia) {
+        (currentMedia as HTMLVideoElement).onended = null;
       }
     };
   }, [
@@ -159,8 +160,8 @@ export default function StoriesDialog({ users, initialUserIndex, onClose }: Stor
                         index === currentStoryIndex
                           ? `${progress}%`
                           : index < currentStoryIndex
-                          ? "100%"
-                          : "0%",
+                            ? "100%"
+                            : "0%",
                     }}
                     transition={{ duration: 0.1, ease: "linear" }}
                   />
@@ -214,10 +215,10 @@ export default function StoriesDialog({ users, initialUserIndex, onClose }: Stor
 
             <StoryFooter
               userName={currentUser}
-              onReplyClick={() => {}}
+              onReplyClick={() => { }}
               liked={currentStory?.liked}
               id={currentStory?.id}
-              onLikeClick={() => {}}
+              onLikeClick={() => { }}
             />
           </div>
 

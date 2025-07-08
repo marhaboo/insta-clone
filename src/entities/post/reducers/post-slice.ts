@@ -19,7 +19,7 @@ export const postSlice = createSlice({
         state.loading = false; 
         state.error = null; 
       })
-      .addCase(postApi.rejected, (state, action) => {
+      .addCase(postApi.rejected, (state) => {
         state.loading = false; 
       });
   },

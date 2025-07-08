@@ -1,7 +1,5 @@
 import React from "react";
 import { FloatingDock } from "@/shared/ui/bottom-navigation";
-import Image from "next/image";
-import { EqualApproximately, Github, Home, PowerOffIcon, Section, Terminal } from "lucide-react";
 import ProfileIcon, { CreateIcon, ExploreIcon, HomeIcon, MessageIcon, ReelsIcon } from "@/app/assets/icon/svg";
 
 export default function AppBottomBar() {

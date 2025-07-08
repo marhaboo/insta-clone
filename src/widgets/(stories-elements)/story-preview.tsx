@@ -1,16 +1,16 @@
 import { motion } from "framer-motion"
 import { Avatar, AvatarImage, AvatarFallback } from "@/shared/ui/avatar"
 import { User } from "./stories-dialog"
+import Image from "next/image"
 
 export interface SidePreviewProps {
   user: User
-  index: number
   isNext: boolean
   onClick: () => void
 }
 
 
-export function SidePreview({ user, index, isNext, onClick }: SidePreviewProps) {
+export function SidePreview({ user,isNext, onClick }: SidePreviewProps) {
   return (
     <motion.div
       key={user.userId}
@@ -21,7 +21,7 @@ export function SidePreview({ user, index, isNext, onClick }: SidePreviewProps) 
       className="group w-full border-2 h-full bg-gray-900 rounded-lg top-0 overflow-hidden cursor-pointer relative"
       onClick={onClick}
     >
-      <img
+      <Image
         src={`https://instagram-api.softclub.tj/images/${user.userImage}`}
         alt={user.userName}
         className="w-full h-full  opacity-50 group-hover:opacity-75 transition-opacity"

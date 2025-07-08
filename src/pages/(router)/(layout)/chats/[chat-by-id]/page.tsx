@@ -3,18 +3,10 @@
 import { AppDispatch, RootState } from "@/app/store/store";
 import { getChatsById } from "@/entities/chats/reducer/api/chat-api";
 import ChatLayout from "@/widgets/chat-layout/chat-layout";
-import { useParams, usePathname, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-
-
-interface Message {
-  id: number;
-  text: string;
-  time: string;
-  isMe: boolean;
-}
 
 export default function ChatById() {
   const params=useParams()
@@ -24,7 +16,7 @@ export default function ChatById() {
   console.log(id);
   useEffect(()=>{
   dispatch(getChatsById(id))
-  },[])
+  },[dispatch,id])
   console.log(data);
   
  return <>

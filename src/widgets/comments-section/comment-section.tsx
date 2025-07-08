@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { Heart, MessageCircle, Share2, X, Bookmark, Send, ChevronLeft, ChevronRight } from "lucide-react";
+import { Heart, X, Send, ChevronLeft, ChevronRight } from "lucide-react";
 import { getToken } from "@/shared/utils/token";
 
 interface Comment {
@@ -14,12 +14,28 @@ interface Comment {
   dateCommented: string;
 }
 
+interface Post {
+  postId: number;
+  userId: string;
+  userName: string;
+  userImage: string | null;
+  title?: string;
+  content?: string;
+  datePublished: string;
+  images: string;
+  isReel: boolean;
+  postLike: boolean;
+  postLikeCount: number;
+  comments?: Comment[];
+}
+
 interface CommentModalProps {
-  post: any;
+  post: Post;
   onClose: () => void;
   onPrevious?: () => void;
   onNext?: () => void;
 }
+
 
 export default function CommentModal({ post, onClose, onPrevious, onNext }: CommentModalProps) {
   const [comments, setComments] = useState<Comment[]>([]);

@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { useRef } from "react"
 
 export interface StoryMediaProps {
@@ -22,7 +23,7 @@ export function StoryMedia({ fileName, isMuted }: StoryMediaProps) {
       muted={isMuted}
     />
   ) : (
-    <img
+    <Image
       ref={mediaRef as React.RefObject<HTMLImageElement>}
       src={`https://instagram-api.softclub.tj/images/${fileName}`}
       alt="Story"

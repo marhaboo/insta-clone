@@ -1,3 +1,4 @@
+import Link from "next/link";
 
 
 export default function NotFound() {
@@ -5,7 +6,7 @@ export default function NotFound() {
         <div style={{ textAlign: "center", padding: "2rem" }}>
             <h1>Страница не найдена</h1>
             <p>Извините, страница, которую вы ищете, не существует.</p>
-            <a href="/">Вернуться на главную</a>
+            <Link href="/">Вернуться на главную</Link>
         </div>
     )
 }

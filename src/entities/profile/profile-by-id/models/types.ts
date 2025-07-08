@@ -44,7 +44,7 @@ export interface MyPost {
     fullname: string;
   }>;
   postFavorite: boolean;
-  userFavorite: any[]; 
+  userFavorite: unknown[]; 
   title: string | null;
   content: string | null;
 }

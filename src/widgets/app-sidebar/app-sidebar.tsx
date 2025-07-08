@@ -35,7 +35,6 @@ interface SidebarItem {
 }
 
 export function AppSidebar() {
-  const dispatch = useDispatch();
   const [isSearchSidebarOpen, setIsSearchSidebarOpen] = useState(false);
   const pathname = usePathname();
   const { language }: { language: Language } = useSettings();

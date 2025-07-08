@@ -17,10 +17,10 @@ const router=useRouter()
   const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
     dispatch(usersApi());
-  }, []);
+  }, [dispatch]);
   return (
     <>
-      {users.map((el: InterProf, i) => {
+      {users.map((el: InterProf) => {
         return (
           <div onClick={()=>router.push(`/profile/${el.id}`)} key={el.id} className="m-4 w-">
             <ProfileUser

@@ -15,6 +15,7 @@ import ProfileUser from "@/shared/ui/profile-user";
 import PostLike from "@/features/(like)/like-post/ui/like-post";
 import CommentModal from "../comments-section/comment-section";
 import { Skeleton } from "@/shared/ui/skeleton"; // Import ShadCN Skeleton
+import Image from "next/image";
 
 interface Post {
   postId: number;
@@ -38,7 +39,7 @@ export default function Post() {
   const [modal, setModal] = useState(false);
   const [selectedPost, setSelectedPost] = useState<Post | null>(null);
 
-  const handleLikeClick = (post: Post) => {
+  const handleLikeClick = () => {
     setLikeStatus(!likeStatus);
 
     if (likeStatus) {
@@ -99,7 +100,7 @@ export default function Post() {
                 className="w-full lg:h-[500px] h-96 object-cover"
               />
             ) : (
-              <img
+              <Image
                 src={`https://instagram-api.softclub.tj/images/${post.images[0]}`}
                 alt="post-image"
                 className="w-full lg:h-[500px] h-96 object-cover"
@@ -134,7 +135,7 @@ export default function Post() {
 
           <div className="px-3 pb-3">
             <p className="font-semibold">
-              {post.postLikeCount + likeCount} отметок "Нравится"
+              {post.postLikeCount + likeCount} отметок &quot;Нравится&quot;
             </p>
             <p>
               <span className="font-semibold">{post.userName}</span>{" "}

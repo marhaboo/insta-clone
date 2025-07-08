@@ -3,7 +3,8 @@ import PostsTab from "@/features/profile/posts-tab/posts-tab";
 import SavedTab from "@/features/profile/saved-tab/saved-tab";
 import ReelsTab from "@/features/profile/reels-tab/reels-tab";
 
-const TabsWidget = ({ tab, setTab, myProfileData }: any) => {
+
+const TabsWidget = ({ tab, setTab, myProfileData }) => {
   return (
     <div>
       <div className="border-t">

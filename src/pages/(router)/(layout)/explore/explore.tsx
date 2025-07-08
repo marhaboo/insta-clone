@@ -15,7 +15,7 @@ export default function Explore() {
   const [isLoading, setIsLoading] = useState(true);
   const [isFetchingNew, setIsFetchingNew] = useState(false);
   const observerRef = useRef<HTMLDivElement | null>(null);
-  const [currentIndex, setCurrentIndex] = useState<number>(0); 
+  const [currentIndex] = useState<number>(0); 
 
   const fetchContent = useCallback(async () => {
     if (isFetchingNew) return;
@@ -41,7 +41,7 @@ export default function Explore() {
 
   useEffect(() => {
     fetchContent();
-  }, [page]);
+  }, [page,fetchContent]);
 
   useEffect(() => {
     if (!observerRef.current) return;

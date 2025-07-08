@@ -1,12 +1,11 @@
 import { axiosRequest } from "@/shared/utils/axiosRequest";
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 
-// Типы для состояния
-interface PostState {
-  openDialog: boolean;
-  postData: any | null;
-  loading: boolean;
-  error: string | null;
+// Тип для поста
+interface Post {
+  id: number;
+  title: string;
+  content: string;
 }
 
 interface FormDataType {
@@ -14,14 +13,24 @@ interface FormDataType {
   content: string;
 }
 
-export const addPost = createAsyncThunk<any, FormDataType, { rejectValue: string }>(
+interface PostState {
+  openDialog: boolean;
+  postData: Post | null;
+  loading: boolean;
+  error: string | null;
+}
+
+export const addPost = createAsyncThunk<Post, FormDataType, { rejectValue: string }>(
   "postPage/addPost",
-  async (formData: FormDataType, { rejectWithValue }) => {
+  async (formData, { rejectWithValue }) => {
     try {
       const { data } = await axiosRequest.post("/Post/add-post", formData);
-      return data.data; // возвращаем данные в случае успеха
-    } catch (error: any) {
-      return rejectWithValue(error.message); // возвращаем ошибку в случае неудачи
+      return data.data as Post;
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        return rejectWithValue(error.message);
+      }
+      return rejectWithValue("Unknown error");
     }
   }
 );
@@ -47,13 +56,13 @@ const postSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-      .addCase(addPost.fulfilled, (state, action) => {
+      .addCase(addPost.fulfilled, (state, action: PayloadAction<Post>) => {
         state.loading = false;
         state.postData = action.payload;
       })
-      .addCase(addPost.rejected, (state, action:any) => {
+      .addCase(addPost.rejected, (state, action: PayloadAction<string | undefined>) => {
         state.loading = false;
-        state.error = action.payload;
+        state.error = action.payload ?? "Unknown error";
       });
   },
 });

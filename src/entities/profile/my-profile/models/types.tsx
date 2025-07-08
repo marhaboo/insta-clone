@@ -32,7 +32,7 @@ import { UserProfile } from "../../profile-by-id/models/types";
     fullname: string;
   }>;
   postFavorite: boolean;
-  userFavorite: any[]; 
+  userFavorite: unknown[]; 
   title: string | null;
   content: string | null;
 }

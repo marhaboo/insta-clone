@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { getChatsById } from "./reducer/api/chat-api";
 
 export const chatsByIdSlice = createSlice({

@@ -8,7 +8,7 @@ export interface User {
 
 export const searchUsers = createAsyncThunk<User[], string, { rejectValue: string }>(
   "user/searchUsers",
-  async (userName, { rejectWithValue }) => {
+  async (userName) => {
     try {
   
 

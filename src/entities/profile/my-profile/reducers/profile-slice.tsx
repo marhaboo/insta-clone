@@ -41,7 +41,7 @@ export const profileSlice = createSlice({
         state.myProfileData = action.payload;
         state.loading = false;
       })
-      .addCase(getMyPost.pending, (state, action) => {
+      .addCase(getMyPost.pending, (state) => {
         state.loading = true;
       })
       .addCase(getFollowingRelationShip.fulfilled, (state,action) => {

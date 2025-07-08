@@ -29,10 +29,10 @@ export default function PostList() {
       
       try {  
         const { data } = await axiosRequest.get("/Post/get-posts?PageSize=10");  
-        let profileUser = await UserApi(decode.sid);  
+        const profileUser = await UserApi(decode.sid);  
         setProfile(profileUser);  
         
-        const transformedPosts: PostData[] = data.data.map((post: any) => ({  
+        const transformedPosts: PostData[] = data.data.map((post: unknown) => ({  
           ...post,  
           media: post.images.map((image: string) => ({  
             type: image.endsWith(".mp4") ? "video" : "image",  
